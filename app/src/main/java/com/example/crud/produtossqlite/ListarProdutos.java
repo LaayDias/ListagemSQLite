@@ -23,13 +23,8 @@ public class ListarProdutos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_produtos);
 
-
-
         db = new DatabaseHandler(this);
         list= (ListView) findViewById(R.id.listView);
-
-
-
 
         Toast.makeText(ListarProdutos.this, "Lendo todos os produtos..", Toast.LENGTH_LONG).show();
         List<Produto> ListaProdutos = db.getAllProdutos();
@@ -64,10 +59,7 @@ public class ListarProdutos extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-
                 String ID = ids[position];
-
-
 
                 Intent intent = new Intent(ListarProdutos.this,MostraProduto.class);
                 intent.putExtra("ID", ID);

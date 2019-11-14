@@ -150,10 +150,8 @@ public class DatabaseHandler extends SQLiteOpenHelper
     //Apagar um produto
     public void deleteProduto(Produto p) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_Produtos, KEY_ID_produto + " = ?",
-                new String[]{String.valueOf(p.getId())});
+        db.delete(TABLE_Produtos, KEY_ID_produto + " = ?", null);
         db.close();
     }
-
 
 }

@@ -1,7 +1,7 @@
 package com.example.crud.produtossqlite;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 public class Inserir extends AppCompatActivity {
 
-    EditText nome,preco, desc;
+    EditText nome, preco, desc;
     Button inserir;
     DatabaseHandler db;
 
@@ -27,20 +27,20 @@ public class Inserir extends AppCompatActivity {
 
         desc = (EditText) findViewById(R.id.desc);
 
-        inserir= (Button) findViewById(R.id.inserir);
+        inserir = (Button) findViewById(R.id.inserir);
 
         inserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String n= nome.getText().toString();
-                double pr=Double.parseDouble(preco.getText().toString());
+                String n = nome.getText().toString();
+                double pr = Double.parseDouble(preco.getText().toString());
 
-                String d=desc.getText().toString();
+                String d = desc.getText().toString();
 
-                Produto p = new Produto(n,pr,d);
+                Produto p = new Produto(n, pr, d);
 
-                long id=db.addPruduto(p);
+                long id = db.addPruduto(p);
 
                 nome.setText("");
                 preco.setText("");

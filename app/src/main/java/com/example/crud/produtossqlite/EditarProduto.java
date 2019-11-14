@@ -30,6 +30,16 @@ public class EditarProduto extends AppCompatActivity {
                 //voltar para "mostrar produto
                 //setContentView(R.layout.activity_listar_produtos);
 
+                String n = nome.getText().toString();
+                double pr = Double.parseDouble(preco.getText().toString());
+
+                String d = desc.getText().toString();
+
+                Produto p = new Produto(n, pr, d);
+
+                long id = db.addPruduto(p);
+
+
             }
         });
 

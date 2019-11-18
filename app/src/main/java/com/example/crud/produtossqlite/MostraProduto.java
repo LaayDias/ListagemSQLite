@@ -18,7 +18,9 @@ public class MostraProduto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostra_produto);
 
-        String id = getIntent().getExtras().getString("ID");
+        final ApagarProduto apagarProduto = new ApagarProduto();
+
+        final String id = getIntent().getExtras().getString("ID");
 
         final DatabaseHandler db = new DatabaseHandler(this);
 
@@ -52,6 +54,7 @@ public class MostraProduto extends AppCompatActivity {
         deletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                apagarProduto.deleteDatabase(id);
                 String info = db.getDatabaseName();
                 Intent intent = new Intent(MostraProduto.this, ApagarProduto.class);
                 intent.putExtra("info", info);

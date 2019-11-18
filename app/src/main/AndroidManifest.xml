@@ -21,6 +21,8 @@
         <activity android:name="com.example.crud.produtossqlite.Inserir" />
         <activity android:name="com.example.crud.produtossqlite.ListarProdutos" />
         <activity android:name="com.example.crud.produtossqlite.MostraProduto"></activity>
+        <activity android:name="com.example.crud.produtossqlite.ApagarProduto"></activity>
+        <activity android:name="com.example.crud.produtossqlite.EditarProduto"></activity>
     </application>
 
 </manifest>

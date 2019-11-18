@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ApagarProduto extends AppCompatActivity {
 
@@ -27,16 +28,12 @@ public class ApagarProduto extends AppCompatActivity {
 
         delete = (Button) findViewById(R.id.btnDelete);
 
-        delete.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
+        this.db.deleteProduto(nome.getText().toString());
+        this.db.deleteProduto(preco.getText().toString());
+        this.db.deleteProduto(desc.getText().toString());
+        Toast.makeText(ApagarProduto.this, "APAGADO", Toast.LENGTH_SHORT).show();
 
-                //configurar aqui o btn delete
-                //voltar para lista de produtos com o produto já excluido
-
-            }
-        });
 
     }
 }

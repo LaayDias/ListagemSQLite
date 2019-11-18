@@ -28,7 +28,6 @@ public class EditarProduto extends AppCompatActivity {
 
                 //configurar aqui o btn editar
                 //voltar para "mostrar produto
-                //setContentView(R.layout.activity_listar_produtos);
 
                 String n = nome.getText().toString();
                 double pr = Double.parseDouble(preco.getText().toString());

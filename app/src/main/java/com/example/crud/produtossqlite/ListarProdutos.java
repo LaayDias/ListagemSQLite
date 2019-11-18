@@ -1,8 +1,8 @@
 package com.example.crud.produtossqlite;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,7 +15,7 @@ public class ListarProdutos extends AppCompatActivity {
     DatabaseHandler db;
     ListView list;
 
-    String [] ids;
+    String[] ids;
 
 
     @Override
@@ -24,44 +24,44 @@ public class ListarProdutos extends AppCompatActivity {
         setContentView(R.layout.activity_listar_produtos);
 
         db = new DatabaseHandler(this);
-        list= (ListView) findViewById(R.id.listView);
+        list = (ListView) findViewById(R.id.listView);
 
         Toast.makeText(ListarProdutos.this, "Lendo todos os produtos..", Toast.LENGTH_LONG).show();
         List<Produto> ListaProdutos = db.getAllProdutos();
 
-        int N=ListaProdutos.size();
-        Toast.makeText(ListarProdutos.this, " total: "+N,Toast.LENGTH_LONG).show();
+        int N = ListaProdutos.size();
+        Toast.makeText(ListarProdutos.this, " total: " + N, Toast.LENGTH_LONG).show();
 
-        ids= new String[N];
-        String [] nomes= new String[N];
-        String [] precos = new String[N];;
+        ids = new String[N];
+        String[] nomes = new String[N];
+        String[] precos = new String[N];
+        ;
 
-        int i=0;
-        for (Produto p: ListaProdutos) {
-            String log = "Id: "+p.getId()+" ,Nome: " + p.getNome() + " ,Preço: " + p.getPreco();
+        int i = 0;
+        for (Produto p : ListaProdutos) {
+            String log = "Id: " + p.getId() + " ,Nome: " + p.getNome() + " ,Preço: " + p.getPreco();
             // Writing Contacts to log
             //Log.d("Name: ", log);
-            ids[i]=""+p.getId();
-            nomes[i]=p.getNome();
-            precos[i]=""+p.getPreco();
+            ids[i] = "" + p.getId();
+            nomes[i] = p.getNome();
+            precos[i] = "" + p.getPreco();
             i++;
 
         }
 
-        final ProdutoAdapter adapter = new ProdutoAdapter(this,ids,nomes,precos);
+        final ProdutoAdapter adapter = new ProdutoAdapter(this, ids, nomes, precos);
 
         list.setAdapter(adapter);
 
         // ListView on item selected listener.
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
                 String ID = ids[position];
 
-                Intent intent = new Intent(ListarProdutos.this,MostraProduto.class);
+                Intent intent = new Intent(ListarProdutos.this, MostraProduto.class);
                 intent.putExtra("ID", ID);
 
                 startActivity(intent);

@@ -11,7 +11,7 @@
     android:weightSum="1"
     tools:context="com.example.crud.produtossqlite.MostraProduto">
 
-    <TextView
+    <EditText
         android:id="@+id/nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:hint="Nome"
         android:textSize="30dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/preco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:hint="Preço"
         android:textSize="20dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/desc"
         android:layout_width="match_parent"
         android:layout_height="188dp"
@@ -40,25 +40,13 @@
         android:textSize="20dp" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:background="@android:drawable/ic_menu_save"></Button>
 
-        <Button
-            android:id="@+id/btnAlter"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:background="@mipmap/ic_edited"></Button>
-
-        <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="60dp"
-
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:background="@mipmap/icon_del_grande"></Button>
-    </LinearLayout>
 
 </LinearLayout>

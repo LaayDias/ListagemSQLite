@@ -18,13 +18,13 @@ public class MostraProduto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostra_produto);
 
-        final ApagarProduto apagarProduto = new ApagarProduto();
-
+        if (getIntent() == null)
+            finish();
         final String id = getIntent().getExtras().getString("ID");
 
         final DatabaseHandler db = new DatabaseHandler(this);
 
-        int MyID = Integer.parseInt(id);
+        final int MyID = Integer.parseInt(id);
 
         nome = (TextView) findViewById(R.id.nome);
         preco = (TextView) findViewById(R.id.preco);
@@ -33,7 +33,7 @@ public class MostraProduto extends AppCompatActivity {
         Produto p = db.getProduto(MyID);
 
         nome.setText(p.getNome());
-        preco.setText("" + p.getPreco());
+        preco.setText(String.valueOf(p.getPreco()));
         desc.setText(p.getDesc());
 
 
@@ -44,9 +44,8 @@ public class MostraProduto extends AppCompatActivity {
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String info = db.getDatabaseName();
-                Intent intent = new Intent(MostraProduto.this, EditarProduto.class);
-                intent.putExtra("info", info);
+                 Intent intent = new Intent(MostraProduto.this, EditarProduto.class);
+                intent.putExtra("ID", MyID);
                 startActivity(intent);
             }
         });
@@ -54,11 +53,8 @@ public class MostraProduto extends AppCompatActivity {
         deletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                apagarProduto.deleteDatabase(id);
-                String info = db.getDatabaseName();
-                Intent intent = new Intent(MostraProduto.this, ApagarProduto.class);
-                intent.putExtra("info", info);
-                startActivity(intent);
+                db.deleteProduto(String.valueOf(MyID));
+                finish();
             }
         });
 

@@ -15,8 +15,8 @@ public class ListarProdutos extends AppCompatActivity {
     DatabaseHandler db;
     ListView list;
 
-    String[] ids;
-
+    List<Produto> listaProdutos;
+    ProdutoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,29 +27,9 @@ public class ListarProdutos extends AppCompatActivity {
         list = (ListView) findViewById(R.id.listView);
 
         Toast.makeText(ListarProdutos.this, "Lendo todos os produtos..", Toast.LENGTH_LONG).show();
-        List<Produto> ListaProdutos = db.getAllProdutos();
+        listaProdutos = db.getAllProdutos();
 
-        int N = ListaProdutos.size();
-        Toast.makeText(ListarProdutos.this, " total: " + N, Toast.LENGTH_LONG).show();
-
-        ids = new String[N];
-        String[] nomes = new String[N];
-        String[] precos = new String[N];
-        ;
-
-        int i = 0;
-        for (Produto p : ListaProdutos) {
-            String log = "Id: " + p.getId() + " ,Nome: " + p.getNome() + " ,Preço: " + p.getPreco();
-            // Writing Contacts to log
-            //Log.d("Name: ", log);
-            ids[i] = "" + p.getId();
-            nomes[i] = p.getNome();
-            precos[i] = "" + p.getPreco();
-            i++;
-
-        }
-
-        final ProdutoAdapter adapter = new ProdutoAdapter(this, ids, nomes, precos);
+        adapter = new ProdutoAdapter(this, listaProdutos);
 
         list.setAdapter(adapter);
 
@@ -59,14 +39,23 @@ public class ListarProdutos extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                String ID = ids[position];
+                String produtoId = String.valueOf(listaProdutos.get(position).id);
 
                 Intent intent = new Intent(ListarProdutos.this, MostraProduto.class);
-                intent.putExtra("ID", ID);
+                intent.putExtra("ID", produtoId);
 
                 startActivity(intent);
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listaProdutos = db.getAllProdutos();
+        adapter.clear();
+        adapter.addAll(listaProdutos);
+        adapter.notifyDataSetChanged();
     }
 }

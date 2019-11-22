@@ -48,6 +48,7 @@ public class Inserir extends AppCompatActivity {
 
 
                 Toast.makeText(Inserir.this, "Foi inserido um produto com o ID: " + id, Toast.LENGTH_LONG).show();
+                finish();
 
             }
         });

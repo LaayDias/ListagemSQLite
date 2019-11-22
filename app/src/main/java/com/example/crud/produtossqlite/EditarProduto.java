@@ -7,15 +7,18 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class EditarProduto extends AppCompatActivity {
-    EditText nome,preco, desc;
+    EditText nome, preco, desc;
     Button editar;
     DatabaseHandler db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mostra_produto);
+        setContentView(R.layout.activity_edita_produto);
 
+        int produtoId = getIntent().getIntExtra("ID", 0);
         db = new DatabaseHandler(this);
+        Produto produto = db.getProduto(produtoId);
 
         nome = (EditText) findViewById(R.id.nome);
         preco = (EditText) findViewById(R.id.preco);
@@ -36,11 +39,15 @@ public class EditarProduto extends AppCompatActivity {
 
                 Produto p = new Produto(n, pr, d);
 
-                long id = db.addPruduto(p);
+                long id = db.updateProduto(p);
+                finish();
 
 
             }
         });
+        nome.setText(produto.nome);
+        preco.setText(String.valueOf(produto.preco));
+        desc.setText(produto.desc);
 
     }
 }

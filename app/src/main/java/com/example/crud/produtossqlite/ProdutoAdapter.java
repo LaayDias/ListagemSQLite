@@ -1,59 +1,49 @@
 package com.example.crud.produtossqlite;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class ProdutoAdapter extends ArrayAdapter<String> {
+
+public class ProdutoAdapter extends ArrayAdapter<Produto> {
 
 
-    Context context;
-    String[] ids;
-    String[] nomes;
-    String[] precos;
-
-    ProdutoAdapter(Context c, String[] Ids, String[] Nomes, String[] Precos) {
-        super(c, R.layout.linha_item_produto, R.id.t_nome, Nomes);
-        this.context = c;
-        this.ids = Ids;
-        this.nomes = Nomes;
-        this.precos = Precos;
+    ProdutoAdapter(Context context, List<Produto> lista) {
+        super(context, 0, lista);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View ConvertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
-        View row = ConvertView;
-
-
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if (row == null) {
-
-
-            row = inflater.inflate(R.layout.linha_item_produto, parent, false);
-
-
+        Produto produto = getItem(position);
+        // Check if an existing view is being reused, otherwise inflate the view
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.linha_item_produto, parent, false);
         }
 
+        if (produto == null)
+            return convertView;
 
-        TextView mNome = (TextView) row.findViewById(R.id.t_nome);
-        TextView mId = (TextView) row.findViewById(R.id.t_id);
-        TextView mPreco = (TextView) row.findViewById(R.id.t_preco);
-
-
-        mNome.setText(nomes[position]);
-
-        mId.setText(ids[position]);
-
-        mPreco.setText(precos[position]);
+        TextView mNome = (TextView) convertView.findViewById(R.id.t_nome);
+        TextView mId = (TextView) convertView.findViewById(R.id.t_id);
+        TextView mPreco = (TextView) convertView.findViewById(R.id.t_preco);
 
 
-        return row;
+        mNome.setText(produto.nome);
+
+        mId.setText(String.valueOf(produto.id));
+
+        mPreco.setText(String.valueOf(produto.preco));
+
+        return convertView;
     }
 
 }
